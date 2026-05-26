@@ -1,10 +1,10 @@
 --[[
-	DeX Explorer
-	Version 1.0
+	Dex++
+	Version 2.2
 	
-	Developed by Fusion
+	Developed by Chillz
 	
-	DeX Explorer is a revival of Moon's and Chillz's Dex, made to fulfill Moon's Dex prophecy.
+	Dex++ is a revival of Moon's Dex, made to fulfill Moon's Dex prophecy.
 ]]
 
 local selection
@@ -13659,6 +13659,16 @@ else
 end
 end,
 }
+-- inject virutal env cuz why not
+if game:GetService("RunService"):IsStudio() then
+	if script:FindFirstChild("Modules"):FindFirstChild("VirtualFS") then
+		for namefunc, func in require(script.Modules.VirtualFS) do
+			getfenv()[namefunc] = func
+			--print("Inserting "..namefunc)
+		end
+	end
+end
+
 local oldgame = oldgame or game
 
 cloneref = cloneref or function(ref)
@@ -13830,12 +13840,12 @@ Main = (function()
 	Main.Elevated = false
 	Main.AllowDraggableOnMobile = true
 	Main.MissingEnv = {}
-	Main.Version = "Beta 1.0.0"
+	Main.Version = "2.2"
 	Main.Mouse = plr:GetMouse()
 	Main.AppControls = {}
 	Main.Apps = Apps
 	Main.MenuApps = {}
-	Main.GitRepoName = "FusionWTF/Dex-Explorer"
+	Main.GitRepoName = "AZYsGithub/DexPlusPlus"
 
 	Main.DisplayOrders = {
 		SideWindow = 8,
@@ -14226,7 +14236,7 @@ Main = (function()
 			t.TextColor3 = Color3.new(1,1,1)
 			t.TextWrapped = true
 			t.TextScaled = true
-			t.Text = "\n\n\n\n\n\n\n\nHello Skidsploit user,\nZinnia, Chillz , Fusion and the Secret Service does not approve of Dex being used on your skidsploit.\nPlease consider getting something better.\n\nIncompatible Reason: "..reason.."\n\n\n\n\n\n\n\n"
+			t.Text = "\n\n\n\n\n\n\n\nHello Skidsploit user,\nZinnia, Chillz and the Secret Service does not approve of Dex being used on your skidsploit.\nPlease consider getting something better.\n\nIncompatible Reason: "..reason.."\n\n\n\n\n\n\n\n"
 			
 			-- This sound wont work!!!
 			local sound = Instance.new("Sound",msg)
@@ -14328,7 +14338,7 @@ Main = (function()
 	--warn(Main.ExportSettings())
 
 	Main.LoadSettings = function()
-		local s, data = pcall(env.readfile or error, "DexSettings.json")
+		local s, data = pcall(env.readfile or error, "DexPlusPlusSettings.json")
 		if s and data and data ~= "" then
 			local s, decoded = pcall(service.HttpService.JSONDecode, service.HttpService, data)
 			if s and decoded then
@@ -14663,13 +14673,13 @@ Main = (function()
 			{2,"Frame",{Active=true,BackgroundColor3=Color3.new(0.20392157137394,0.20392157137394,0.20392157137394),BorderSizePixel=0,Name="Main",Parent={1},Position=UDim2.new(0.5,-175,0.5,-100),Size=UDim2.new(0,350,0,200),}},
 			{3,"Frame",{BackgroundColor3=Color3.new(0.17647059261799,0.17647059261799,0.17647059261799),BorderSizePixel=0,ClipsDescendants=true,Name="Holder",Parent={2},Size=UDim2.new(1,0,1,0),}},
 			{4,"UIGradient",{Parent={3},Rotation=30,Transparency=NumberSequence.new({NumberSequenceKeypoint.new(0,1,0),NumberSequenceKeypoint.new(1,1,0),}),}},
-			{5,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=4,Name="Title",Parent={3},Position=UDim2.new(0,-190,0,15),Size=UDim2.new(0,100,0,50),Text="DeX",TextColor3=Color3.new(1,1,1),TextSize=50,TextTransparency=1,}},
+			{5,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=4,Name="Title",Parent={3},Position=UDim2.new(0,-190,0,15),Size=UDim2.new(0,100,0,50),Text="Dex++",TextColor3=Color3.new(1,1,1),TextSize=50,TextTransparency=1,}},
 			{6,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Desc",Parent={3},Position=UDim2.new(0,-230,0,60),Size=UDim2.new(0,180,0,25),Text="Ultimate Debugging Suite",TextColor3=Color3.new(1,1,1),TextSize=18,TextTransparency=1,}},
 			{7,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="StatusText",Parent={3},Position=UDim2.new(0,20,0,110),Size=UDim2.new(0,180,0,25),Text="Fetching API",TextColor3=Color3.new(1,1,1),TextSize=14,TextTransparency=1,}},
 			{8,"Frame",{BackgroundColor3=Color3.new(0.20392157137394,0.20392157137394,0.20392157137394),BorderSizePixel=0,Name="ProgressBar",Parent={3},Position=UDim2.new(0,110,0,145),Size=UDim2.new(0,0,0,4),}},
 			{9,"Frame",{BackgroundColor3=Color3.new(0.2392156869173,0.56078433990479,0.86274510622025),BorderSizePixel=0,Name="Bar",Parent={8},Size=UDim2.new(0,0,1,0),}},
 			{10,"ImageLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Image="rbxassetid://2764171053",ImageColor3=Color3.new(0.17647059261799,0.17647059261799,0.17647059261799),Parent={8},ScaleType=1,Size=UDim2.new(1,0,1,0),SliceCenter=Rect.new(2,2,254,254),}},
-			{11,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Creator",Parent={2},Position=UDim2.new(1,-110,1,-20),Size=UDim2.new(0,105,0,20),Text="Developed by Fusion.",TextColor3=Color3.new(1,1,1),TextSize=14,TextXAlignment=1,}},
+			{11,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Creator",Parent={2},Position=UDim2.new(1,-110,1,-20),Size=UDim2.new(0,105,0,20),Text="Developed by Chillz.",TextColor3=Color3.new(1,1,1),TextSize=14,TextXAlignment=1,}},
 			{12,"UIGradient",{Parent={11},Transparency=NumberSequence.new({NumberSequenceKeypoint.new(0,1,0),NumberSequenceKeypoint.new(1,1,0),}),}},
 			{13,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Version",Parent={2},Position=UDim2.new(1,-110,1,-35),Size=UDim2.new(0,105,0,20),Text=Main.Version,TextColor3=Color3.new(1,1,1),TextSize=14,TextXAlignment=1,}},
 			{14,"UIGradient",{Parent={13},Transparency=NumberSequence.new({NumberSequenceKeypoint.new(0,1,0),NumberSequenceKeypoint.new(1,1,0),}),}},
@@ -14900,7 +14910,7 @@ Main = (function()
 	Main.SetMainGuiOpen = function(val)
 		Main.MainGuiOpen = val
 
-		Main.MainGui.OpenButton.Text = val and "Close" or "DeX"
+		Main.MainGui.OpenButton.Text = val and "Close" or "Dex++"
 		if val then Main.MainGui.OpenButton.MainFrame.Visible = true end
 		Main.MainGui.OpenButton.MainFrame:TweenSize(val and UDim2.new(0,224,0,200) or UDim2.new(0,0,0,0),Enum.EasingDirection.Out,Enum.EasingStyle.Quad,0.2,true)
 		--Main.MainGui.OpenButton.BackgroundTransparency = val and 0 or (Lib.CheckMouseInGui(Main.MainGui.OpenButton) and 0 or 0.2)
@@ -14928,7 +14938,7 @@ Main = (function()
 	Main.CreateMainGui = function()
 		local gui = create({
 			{1,"ScreenGui",{IgnoreGuiInset=true,Name="MainMenu",}},
-			{2,"TextButton",{AnchorPoint=Vector2.new(0.5,0),AutoButtonColor=false,BackgroundColor3=Color3.new(0.17647059261799,0.17647059261799,0.17647059261799),BorderSizePixel=0,Font=4,Name="OpenButton",Parent={1},Position=UDim2.new(0.5,0,0,2),Size=UDim2.new(0,55,0,32),Text="DeX",TextColor3=Color3.new(1,1,1),TextSize=16,TextTransparency=0.20000000298023,}},
+			{2,"TextButton",{AnchorPoint=Vector2.new(0.5,0),AutoButtonColor=false,BackgroundColor3=Color3.new(0.17647059261799,0.17647059261799,0.17647059261799),BorderSizePixel=0,Font=4,Name="OpenButton",Parent={1},Position=UDim2.new(0.5,0,0,2),Size=UDim2.new(0,55,0,32),Text="Dex++",TextColor3=Color3.new(1,1,1),TextSize=16,TextTransparency=0.20000000298023,}},
 			{3,"UICorner",{CornerRadius=UDim.new(0,4),Parent={2},}},
 			{4,"Frame",{AnchorPoint=Vector2.new(0.5,0),BackgroundColor3=Color3.new(0.17647059261799,0.17647059261799,0.17647059261799),ClipsDescendants=true,Name="MainFrame",Parent={2},Position=UDim2.new(0.5,0,1,-4),Size=UDim2.new(0,224,0,200),}},
 			{5,"UICorner",{CornerRadius=UDim.new(0,4),Parent={4},}},
@@ -14984,9 +14994,9 @@ Main = (function()
 			local duration = 1
 			local Infos = {
 				"Contributors >>",
-				"Chillz (Dex++)",
+				"Toon (IY Dex and PRs)",
 				"Moon (Dex)",
-				"Fusion (DeX)",
+				"Cazan (3D Preview)",
 			}
 			
 			if isInfoCD then return end
@@ -15071,8 +15081,8 @@ Main = (function()
 	Main.Init = function()
 		Main.Elevated = pcall(function() local a = game:GetService("CoreGui"):GetFullName() end)
 		
-		if writefile and isfile and not isfile("DexSettings.json") then
-			writefile("DexSettings.json", Main.ExportSettings())
+		if writefile and isfile and not isfile("DexPlusPlusSettings.json") then
+			writefile("DexPlusPlusSettings.json", Main.ExportSettings())
 		end
 		
 		Main.InitEnv()
